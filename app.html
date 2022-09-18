@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Ken Klein</title>
+    <title>FizzBuzz: A Coding Project by Ken Klein</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="img/favicon-32x32.png" class="d-inline-block align-text-bottom"
-            alt="Ken Codes Logo" width="30" height="24"> APP NAME</a>
+            alt="Ken Codes Logo" width="30" height="24"> FizzBuzz</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                     <a class="nav-link" href="code.html">The Code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                    <a class="nav-link" target="_blank" href="https://github.com/Rating001/FizzBuzz.git">Git Repo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="http://kencodes.net/portfolio/portfolio.html">About</a>
@@ -51,8 +51,57 @@
 </nav>
 <!-- ==== Main Section ==== -->
 <main class="flex-shrink-0">
-    <div class="container">
-
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col col-lg-4">
+                <div>
+                    <h1>Fizz Buzz App</h1>
+                    <h4 class="lead mt-2">Print the numbers 1 through 100, but if the number is divisible by #A then print Fizz, if the number is divisible by #B then print Buzz; if the number is divisible by both #A and #B then print FizzBuzz.</h4>
+                </div>
+                <div class="col-12 border-top border-primary border-2 mt-3"></div>
+                <div><h1 class="mt-2">Instructions</h1>
+                    <ol>
+                        <li class="lead">Enter a number above 0 for Fizz and Buzz.</li>
+                        <li class="lead">Press "Fizz Buzz!"</li>
+                        <li class="lead">Make many "Ooooooo and Ahhhhhhhs"</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col col-lg-8">
+                <div>
+                    <form class="row">
+                        <div class="col">
+                            <label for="fizzNum">Enter a Fizz number greater than 0.</label>
+                            <input type="number" class="form-control mt-1" placeholder="Fizz Number" id="fizzNumber" value="3" aria-label="Enter a Fizz number greater than 0">
+                        </div>
+                        <div class="col">
+                            <label for="buzzNum">Enter a Buzz number greater than 0.</label>
+                            <input type="number" class="form-control mt-1" placeholder="Buzz Number" id="buzzNumber" value="5" aria-label="Enter a Buzz number greater than 0">
+                        </div>
+                        <div class="col-12 mt-1 pb-0">
+                            <p>Note:&nbsp;Numbers will be rounded down to the next whole number.</p>
+                        </div>
+                        <div class="col-12">
+                            <button id="fizzButton" class="btn btn-primary" type="button">Fizz Buzz!</button>
+                        </div>
+                    </form>
+                    <div class="alert alert-primary mt-5" id="alert" role="alert">
+                        <h4 class="alert-heading">Fizz Buzz Results</h4>
+                        <hr>
+                        <div class="col">
+                            <p id="resultsText">
+                                <!--Insert Text Answer Here-->
+                            </p>
+                        </div>
+                        <table class="table table-striped table-sm table-responsive">
+                            <tbody id="results">
+                                <!--Insert Table Answer Here-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
     <!-- ==== Footer Section ==== -->
@@ -74,7 +123,7 @@
                             <a href="#" target="_blank"><i class="social fab fa-linkedin fa-2x"></i></a>
                         </div>
                         <div class="col social">
-                            <a href="#" target="_blank"><i class="social fab fa-github fa-2x"></i></a>
+                            <a href="https://github.com/Rating001" target="_blank"><i class="social fab fa-github fa-2x"></i></a>
                         </div>
                         <div class="col social">
                             <a href="#" target="_blank"><i class="social fab fa-twitter fa-2x"></i></a>
@@ -90,6 +139,9 @@
     </script>
 
     <script src="/js/site.js"></script>
+    <script>
+        document.getElementById("fizzButton").addEventListener("click", getInputD);
+    </script>
 </body>
 
 </html>
