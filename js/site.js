@@ -6,7 +6,8 @@ function getInput() {
    document.getElementById("alertTable").classList.add("hideMe");
     
     let answers = "";
-    
+    let coloredAnswers = "";
+
     let fizzNumber = document.getElementById("fizzNumber").value;
     let buzzNumber = document.getElementById("buzzNumber").value;
 
@@ -24,19 +25,34 @@ function getInput() {
             switch(choice){
                 case 'ternaryWithTable':
                     answers = checkDivisibleA(fizzNumber, buzzNumber);
-                    displayTable(answers);
+                    displayTable(answers,checked);
                     break;
                 case 'ternaryWithText':
                     answers = checkDivisibleB(fizzNumber, buzzNumber);
-                    displayText(answers);
+                    if (checked) {
+                        coloredAnswers = addColorText(answers);
+                        displayText(coloredAnswers);
+                    } else {
+                        displayText(answers);
+                    }
                     break;
                 case 'switchWithText':
                     answers = checkDivisibleC(fizzNumber, buzzNumber);
-                    displayText(answers);
+                    if (checked) {
+                        coloredAnswers = addColorText(answers);
+                        displayText(coloredAnswers);
+                    } else {
+                        displayText(answers);
+                    }
                     break;
                 case 'ifStatementWithText':
                     answers = checkDivisibleD(fizzNumber, buzzNumber);
-                    displayText(answers);
+                    if (checked) {
+                        coloredAnswers = addColorText(answers);
+                        displayText(coloredAnswers);
+                    } else {
+                        displayText(answers);
+                    }
                     break;
             }
 
@@ -131,6 +147,44 @@ function checkDivisibleD(fizz, buzz) {
 
     return answers;
 }
+//Add color to the array of answers
+function addColorTable(answers) {
+
+}
+
+//Add color to the string of answers
+function addColorText(answers) {
+
+    coloredAnswers = "";
+    let splitString = answers.split(" ");
+
+    // for (let i = 1; i <= 100; i++) {
+    //     splitString = answers.split(" ");
+    // }
+
+    for (i = 0 ; i <= 99; i++) {
+        switch (splitString[i]) {
+            case 'FizzBuzz': {
+                coloredAnswers += `<span class="FizzBuzz">FizzBuzz</span> `;
+                break;
+            }
+            case 'Fizz': {
+                coloredAnswers += `<span class="Fizz">Fizz</span> `;
+                break;
+            }
+            case 'Buzz': {
+                coloredAnswers += `<span class="Buzz">Buzz</span> `;
+                break;
+            }
+            default: {
+                coloredAnswers += `<span class="nonFizzBuzz">${splitString[i]}</span> `;
+                break;
+            }
+        }
+    }
+
+    return coloredAnswers;
+}
 
 //Fuction to display the answers as a single string of text
 function displayText(answers) {
@@ -142,26 +196,62 @@ function displayText(answers) {
     document.getElementById("alertText").classList.remove("hideMe");
 }
 
-function displayTable(answers) {
+function displayTable(answers,checked) {
 
     //Create a string of HTML using the 2 templates on app.html that formats the data in a 5 x 20 table
-    let headTemplate = document.getElementById('template-header');
-    let rowTemplate = document.getElementById('template-row-items');
+    
+    //Get the table body element from the page
+    let tableBody = document.getElementById('resultsTable');
 
-    let templateHTML = rowTemplate.innerHTML;
-    let resultsHTML = headTemplate.innerHTML;
+    //Get the template row
+    let templateRow = document.getElementById('fbTemplate');
 
-    for (let i = 1; i <= 100; i+=5) {
-        resultsHTML += templateHTML.replace('{{val1}}', answers[i])
-                                   .replace('{{val2}}', answers[i+1])
-                                   .replace('{{val3}}', answers[i+2])
-                                   .replace('{{val4}}', answers[i+3])
-                                   .replace('{{val5}}', answers[i+4]);        
+    //Clear the table
+    tableBody.innerHTML = "";
+
+    for (let i = 1; i < 100; i += 5) {
+        let tableRow = document.importNode(templateRow.content, true);
+        
+        //Place the TDs into an array and write values to them
+        //If the switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
+        let rowCols = tableRow.querySelectorAll("td");
+
+        if (checked) {
+            rowCols[0].classList.add(answers[i]);
+            rowCols[0].textContent = answers[i];
+        } else {
+            rowCols[0].textContent = answers[i];
+        }
+        if (checked) {
+            rowCols[1].classList.add(answers[i+1]);
+            rowCols[1].textContent = answers[i+1];
+        } else {
+            rowCols[1].textContent = answers[i+1];
+        }
+        if (checked) {
+            rowCols[2].classList.add(answers[i+2]);
+            rowCols[2].textContent = answers[i+2];
+        } else {
+            rowCols[2].textContent = answers[i+2];
+        }
+        if (checked) {
+            rowCols[3].classList.add(answers[i+3]);
+            rowCols[3].textContent = answers[i+3];
+        } else {
+            rowCols[3].textContent = answers[i+3];
+        }
+        if (checked) {
+            rowCols[4].classList.add(answers[i+4]);
+            rowCols[4].textContent = answers[i+4];
+        } else {
+            rowCols[4].textContent = answers[i+4];
+        }
+
+        //Print to the table
+        tableBody.appendChild(tableRow);
     }
-
-    //Write the answer to "resultsTable" inner HTML
-    document.getElementById('resultsTable').innerHTML = resultsHTML;
 
     //Turn on the alert box
     document.getElementById("alertTable").classList.remove("hideMe");
+
 }

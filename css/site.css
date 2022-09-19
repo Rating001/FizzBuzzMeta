@@ -34,6 +34,23 @@ footer .social>a {
     color:purple;
 }
 
+.FizzBuzz {
+    color: red;
+    font-weight:bold;
+}
+
+.Fizz {
+    color: rgb(183, 0, 255);
+}
+
+.Buzz {
+    color: green;
+}
+
+.nonFizzBuzz {
+    color: gray;
+    opacity: 0.5;
+}
 .jsicon {
     color:rgb(226, 211, 4);
 }

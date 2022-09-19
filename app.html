@@ -102,9 +102,12 @@
                     </form>
                     <div class="col-12 border-top border-primary border-2 mt-5 hideMe"></div>
                     <div class="alert alert-primary mt-5 hideMe" id="alertTable" role="alert">
+                        <h4 class="alert-heading text-primary">Fizz Buzz Results</h4>
                         <div style="overflow-x:auto">
-                            <table id="resultsTable" class="table table-striped table-sm table-responsive">
-                                <!--Insert Table Answer Here-->
+                            <table class="table table-striped table-sm table-responsive">
+                                <tbody id="resultsTable">
+                                    <!--Insert Table Answer Here-->
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -117,20 +120,6 @@
                             </p>
                         </div>
                     </div>
-
-
-                        <!--Templates for displaying the table-->
-                        <script id="template-header" type="text/template">
-                            <thead>
-                                <tr><th colspan="5"><h4 class="alert-heading text-primary">Fizz Buzz Results</h4></th></tr>
-                            </thead>
-                        </script>
-                        <script id="template-row-items" type="text/template">
-                            <tr>
-                                <td>{{val1}}</td><td>{{val2}}</td><td>{{val3}}</td><td>{{val4}}</td><td>{{val5}}</td>
-                            </tr>
-                        </script>
-
                     </div>
                 </div>
             </div>
@@ -166,6 +155,16 @@
            </div>
         </div>
     </footer>
+
+    <template id="fbTemplate">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
