@@ -12,7 +12,9 @@ body {
 nav {
     background-color: var(--dark-color);
 }
+.h-100 {
 
+}
 footer {
     background-color: var(--dark-color);
 }
@@ -32,6 +34,10 @@ footer .social>a {
 
 .bsicon {
     color:purple;
+}
+
+.codeBlock {
+    overflow:scroll;
 }
 
 .FizzBuzz {

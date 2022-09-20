@@ -1,9 +1,8 @@
-//Get numbers from the DOM
+//Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
 function getInput() {
-
-   document.getElementById("alertText").classList.add("hideMe");
-
-   document.getElementById("alertTable").classList.add("hideMe");
+    //Hiding the two alert boxes each run so there isn't an empty box before or after the proper displayed text/table
+    document.getElementById("alertText").classList.add("hideMe");
+    document.getElementById("alertTable").classList.add("hideMe");
     
     let answers = "";
     let coloredAnswers = "";
@@ -19,7 +18,7 @@ function getInput() {
     buzzNumber = parseInt(buzzNumber);
 
     if (Number.isInteger(fizzNumber) && Number.isInteger(buzzNumber)) {
-        //Call checkDivisible function
+
         if ((fizzNumber > 0) && (buzzNumber > 0)) {
 
             switch(choice){
@@ -65,7 +64,6 @@ function getInput() {
     }
     
 //--------------------------------------------------------------------------------
-//Calculate if the number is divisible by Fizz, Buzz, or both Fizz and Buzz
 //This solution is for the "Ternary Operator with Table Output" option    
 function checkDivisibleA(fizz,buzz) {
     let answers = [];
@@ -78,7 +76,6 @@ function checkDivisibleA(fizz,buzz) {
 }
 
 //--------------------------------------------------------------------------------
-//Calculate if the number is divisible by Fizz, Buzz, or both Fizz and Buzz
 //This solution is for the "Ternary Operator with Text Output" option
 function checkDivisibleB(fizz,buzz) {
     let answers = "";
@@ -91,7 +88,6 @@ function checkDivisibleB(fizz,buzz) {
 }
 
 //--------------------------------------------------------------------------------
-//Calculate if the number is divisible by Fizz, Buzz, or both Fizz and Buzz
 //This solution is for the "Boolean Switch Case with Text Output" option
 function checkDivisibleC(fizz, buzz) {
     let answers = "";
@@ -125,15 +121,12 @@ function checkDivisibleC(fizz, buzz) {
 }
 
 //--------------------------------------------------------------------------------
-//Calculate if the number is divisible by Fizz, Buzz, or both Fizz and Buzz
 //This solution is for the "If Statement with Text Output" option
 function checkDivisibleD(fizz, buzz) {
 
     let answers = "";
 
-    //We want to get all numbers from start to end
     for(let index = 1; index <= 100; index++){
-        //This will execute in a loop until index = endValue
         if ((index % fizz ==0) && (index % buzz ==0)) {
             answers += "FizzBuzz ";
         }   else if (index % buzz == 0) {
@@ -147,20 +140,13 @@ function checkDivisibleD(fizz, buzz) {
 
     return answers;
 }
-//Add color to the array of answers
-function addColorTable(answers) {
 
-}
-
+//--------------------------------------------------------------------------------
 //Add color to the string of answers
 function addColorText(answers) {
 
     coloredAnswers = "";
     let splitString = answers.split(" ");
-
-    // for (let i = 1; i <= 100; i++) {
-    //     splitString = answers.split(" ");
-    // }
 
     for (i = 0 ; i <= 99; i++) {
         switch (splitString[i]) {
@@ -186,34 +172,31 @@ function addColorText(answers) {
     return coloredAnswers;
 }
 
+//--------------------------------------------------------------------------------
 //Fuction to display the answers as a single string of text
 function displayText(answers) {
     
-    //Write the answer to the "resultsText" inner HTML
     document.getElementById("resultsText").innerHTML = answers;
 
     //Turn on the alert box
     document.getElementById("alertText").classList.remove("hideMe");
 }
 
+//--------------------------------------------------------------------------------
+//Function to display the elements in a table
 function displayTable(answers,checked) {
 
-    //Create a string of HTML using the 2 templates on app.html that formats the data in a 5 x 20 table
-    
-    //Get the table body element from the page
     let tableBody = document.getElementById('resultsTable');
 
-    //Get the template row
     let templateRow = document.getElementById('fbTemplate');
 
-    //Clear the table
     tableBody.innerHTML = "";
 
     for (let i = 1; i < 100; i += 5) {
         let tableRow = document.importNode(templateRow.content, true);
         
         //Place the TDs into an array and write values to them
-        //If the switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
+        //If the color switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
         let rowCols = tableRow.querySelectorAll("td");
 
         if (checked) {
