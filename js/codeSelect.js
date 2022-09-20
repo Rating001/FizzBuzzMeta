@@ -1,10 +1,9 @@
 function changeCode() {
 
     //Getting the drop down menu's selection and sending it through to the codeUpdate (switch statement) to change the page's text.
-    let choice = document.getElementById('codeSelect');
+    let choice = document.getElementById('codeSelect').value;
 
     codeUpdate(choice);
-    descriptionUpdate(choice);
 }
 
 function codeUpdate(choice) {

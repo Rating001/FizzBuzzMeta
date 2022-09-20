@@ -52,11 +52,11 @@
     </div>
 </nav>
 <!-- ==== Main Section ==== -->
-<main class="flex-shrink-0 h-100">
-    <div class="container-fluid py-4 px-5 mt-5 h-100">
+<main class="flex-shrink-0 d-md-height-80vh">
+    <div class="container-fluid py-4 px-5 mt-5 h-80">
         <h2 class="border-1 border-bottom border-dark">The Code for FizzBuzz</h2>
-        <div class="row row-cols-1 row-cols-lg-2 h-100">
-            <div class="col-lg-8 h-100">
+        <div class="row row-cols-1 row-cols-lg-2 h-80">
+            <div class="col-lg-8 h-80">
                 <div class="col-12 mb-2">
                     <div>
                         Choose the way Fizz Buzz is solved:
@@ -68,7 +68,7 @@
                     <option value="ifStatementWithText">If Statement with Text Output</option>
                 <select>
                 </div>
-                <div id="ternaryWithTable" class="col-12 codeBlock h-100">
+                <div id="ternaryWithTable" class="col-12 codeBlock">
                     <pre class="line-numbers"><code class="language-javascript">
                         //Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
                         function getInput() {
@@ -136,7 +136,7 @@
                             }
                             
                         //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Table Output" option    
+                        //This solution is specifically for the "Ternary Operator with Table Output" option
                         function checkDivisibleA(fizz,buzz) {
                             let answers = [];
                         
@@ -207,7 +207,130 @@
                     </code>
                     </pre>
                 </div>
-                <div id="ternaryWithText" class="hideMe">
+                <div id="ternaryWithText" class="col-12 codeBlock hideMe">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        //Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
+                        function getInput() {
+                            //Hiding the two alert boxes each run so there isn't an empty box before or after the proper displayed text/table
+                            document.getElementById("alertText").classList.add("hideMe");
+                            document.getElementById("alertTable").classList.add("hideMe");
+                            
+                            let answers = "";
+                            let coloredAnswers = "";
+                        
+                            let fizzNumber = document.getElementById("fizzNumber").value;
+                            let buzzNumber = document.getElementById("buzzNumber").value;
+                        
+                            let choice = document.getElementById('selector').value;
+                        
+                            let checked = document.getElementById('addColor').checked;
+                        
+                            fizzNumber = parseInt(fizzNumber);
+                            buzzNumber = parseInt(buzzNumber);
+                        
+                            if (Number.isInteger(fizzNumber) && Number.isInteger(buzzNumber)) {
+                        
+                                if ((fizzNumber > 0) && (buzzNumber > 0)) {
+                        
+                                    switch(choice){
+                                        case 'ternaryWithTable':
+                                            answers = checkDivisibleA(fizzNumber, buzzNumber);
+                                            displayTable(answers,checked);
+                                            break;
+                                        case 'ternaryWithText':
+                                            answers = checkDivisibleB(fizzNumber, buzzNumber);
+                                            if (checked) {
+                                                coloredAnswers = addColorText(answers);
+                                                displayText(coloredAnswers);
+                                            } else {
+                                                displayText(answers);
+                                            }
+                                            break;
+                                        case 'switchWithText':
+                                            answers = checkDivisibleC(fizzNumber, buzzNumber);
+                                            if (checked) {
+                                                coloredAnswers = addColorText(answers);
+                                                displayText(coloredAnswers);
+                                            } else {
+                                                displayText(answers);
+                                            }
+                                            break;
+                                        case 'ifStatementWithText':
+                                            answers = checkDivisibleD(fizzNumber, buzzNumber);
+                                            if (checked) {
+                                                coloredAnswers = addColorText(answers);
+                                                displayText(coloredAnswers);
+                                            } else {
+                                                displayText(answers);
+                                            }
+                                            break;
+                                    }
+                        
+                                } else {
+                                    alert("You must enter numbers greater than 0.");
+                                }
+                            } else {
+                                alert("You must enter integers.");
+                            }
+                            }
+                            
+
+                        //--------------------------------------------------------------------------------
+                        //This solution is specifically for the "Ternary Operator with Text Output" option
+                        function checkDivisibleB(fizz,buzz) {
+                            let answers = "";
+                        
+                            for (let index = 1; index <= 100; index++){
+                                    answers += ((index % fizz == 0 ? 'Fizz' : '') + (index % buzz == 0 ? 'Buzz' : '') || index) + ' ';
+                            }
+                        
+                            return answers;
+                        }
+                        
+                        //--------------------------------------------------------------------------------
+                        //Add color to the string of answers if the switch is enabled
+                        function addColorText(answers) {
+                        
+                            coloredAnswers = "";
+                            let splitString = answers.split(" ");
+                        
+                            for (i = 0 ; i <= 99; i++) {
+                                switch (splitString[i]) {
+                                    case 'FizzBuzz': {
+                                        coloredAnswers += `<span class="FizzBuzz">FizzBuzz</span> `;
+                                        break;
+                                    }
+                                    case 'Fizz': {
+                                        coloredAnswers += `<span class="Fizz">Fizz</span> `;
+                                        break;
+                                    }
+                                    case 'Buzz': {
+                                        coloredAnswers += `<span class="Buzz">Buzz</span> `;
+                                        break;
+                                    }
+                                    default: {
+                                        coloredAnswers += `<span class="nonFizzBuzz">${splitString[i]}</span> `;
+                                        break;
+                                    }
+                                }
+                            }
+                        
+                            return coloredAnswers;
+                        }
+                        
+                        //--------------------------------------------------------------------------------
+                        //Fuction to display the answers as a single string of text
+                        function displayText(answers) {
+                            
+                            document.getElementById("resultsText").innerHTML = answers;
+                        
+                            //Turn on the alert box
+                            document.getElementById("alertText").classList.remove("hideMe");
+                        }
+                    </code>
+                    </pre>
+                </div>
+                <div id="switchWithText" class="col-12 codeBlock hideMe">
                     <pre class="line-numbers"><code class="language-javascript">
                         //Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
                         function getInput() {
@@ -275,31 +398,7 @@
                             }
                             
                         //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Table Output" option    
-                        function checkDivisibleA(fizz,buzz) {
-                            let answers = [];
-                        
-                            for (let i = 1; i <= 100; i++) {
-                                answers[i] = ((i % fizz == 0 ? 'Fizz' : '') + (i % buzz == 0 ? 'Buzz' : '') || i);        
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Text Output" option
-                        function checkDivisibleB(fizz,buzz) {
-                            let answers = "";
-                        
-                            for (let index = 1; index <= 100; index++){
-                                    answers += ((index % fizz == 0 ? 'Fizz' : '') + (index % buzz == 0 ? 'Buzz' : '') || index) + ' ';
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Boolean Switch Case with Text Output" option
+                        //This solution is specifically for the "Boolean Switch Case with Text Output" option
                         function checkDivisibleC(fizz, buzz) {
                             let answers = "";
                             let fizzy = false;
@@ -330,28 +429,7 @@
                         
                             return answers;
                         }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "If Statement with Text Output" option
-                        function checkDivisibleD(fizz, buzz) {
-                        
-                            let answers = "";
-                        
-                            for(let index = 1; index <= 100; index++){
-                                if ((index % fizz ==0) && (index % buzz ==0)) {
-                                    answers += "FizzBuzz ";
-                                }   else if (index % buzz == 0) {
-                                    answers += "Buzz ";
-                                }   else if (index % fizz == 0) {
-                                    answers += "Fizz ";
-                                } else {
-                                    answers += index + ' ';
-                                }
-                            }
-                        
-                            return answers;
-                        }
-                        
+
                         //--------------------------------------------------------------------------------
                         //Add color to the string of answers
                         function addColorText(answers) {
@@ -392,67 +470,10 @@
                             //Turn on the alert box
                             document.getElementById("alertText").classList.remove("hideMe");
                         }
-                        
-                        //--------------------------------------------------------------------------------
-                        //Function to display the elements in a table
-                        function displayTable(answers,checked) {
-                        
-                            let tableBody = document.getElementById('resultsTable');
-                        
-                            let templateRow = document.getElementById('fbTemplate');
-                        
-                            tableBody.innerHTML = "";
-                        
-                            for (let i = 1; i < 100; i += 5) {
-                                let tableRow = document.importNode(templateRow.content, true);
-                                
-                                //Place the TDs into an array and write values to them
-                                //If the color switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
-                                let rowCols = tableRow.querySelectorAll("td");
-                        
-                                if (checked) {
-                                    rowCols[0].classList.add(answers[i]);
-                                    rowCols[0].textContent = answers[i];
-                                } else {
-                                    rowCols[0].textContent = answers[i];
-                                }
-                                if (checked) {
-                                    rowCols[1].classList.add(answers[i+1]);
-                                    rowCols[1].textContent = answers[i+1];
-                                } else {
-                                    rowCols[1].textContent = answers[i+1];
-                                }
-                                if (checked) {
-                                    rowCols[2].classList.add(answers[i+2]);
-                                    rowCols[2].textContent = answers[i+2];
-                                } else {
-                                    rowCols[2].textContent = answers[i+2];
-                                }
-                                if (checked) {
-                                    rowCols[3].classList.add(answers[i+3]);
-                                    rowCols[3].textContent = answers[i+3];
-                                } else {
-                                    rowCols[3].textContent = answers[i+3];
-                                }
-                                if (checked) {
-                                    rowCols[4].classList.add(answers[i+4]);
-                                    rowCols[4].textContent = answers[i+4];
-                                } else {
-                                    rowCols[4].textContent = answers[i+4];
-                                }
-                        
-                                //Print to the table
-                                tableBody.appendChild(tableRow);
-                            }
-                        
-                            //Turn on the alert box
-                            document.getElementById("alertTable").classList.remove("hideMe");
-                        
-                        }
                     </code>
                     </pre>
                 </div>
-                <div id="switchWithText" class="hideMe">
+                <div id="ifStatementWithText" class="col-12 codeBlock hideMe">
                     <pre class="line-numbers"><code class="language-javascript">
                         //Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
                         function getInput() {
@@ -520,64 +541,7 @@
                             }
                             
                         //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Table Output" option    
-                        function checkDivisibleA(fizz,buzz) {
-                            let answers = [];
-                        
-                            for (let i = 1; i <= 100; i++) {
-                                answers[i] = ((i % fizz == 0 ? 'Fizz' : '') + (i % buzz == 0 ? 'Buzz' : '') || i);        
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Text Output" option
-                        function checkDivisibleB(fizz,buzz) {
-                            let answers = "";
-                        
-                            for (let index = 1; index <= 100; index++){
-                                    answers += ((index % fizz == 0 ? 'Fizz' : '') + (index % buzz == 0 ? 'Buzz' : '') || index) + ' ';
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Boolean Switch Case with Text Output" option
-                        function checkDivisibleC(fizz, buzz) {
-                            let answers = "";
-                            let fizzy = false;
-                            let buzzy = false;
-                        
-                            for (let i = 1; i <= 100; i++) {
-                                fizzy = (i % fizz == 0);
-                                buzzy = (i % buzz == 0);
-                                switch(true) {
-                                    case fizzy && buzzy: {
-                                        answers += 'FizzBuzz ';
-                                        break;
-                                    }
-                                    case fizzy: {
-                                        answers += 'Fizz ';
-                                        break;
-                                    }
-                                    case buzzy: {
-                                        answers += 'Buzz ';
-                                        break;
-                                    }
-                                    default: {
-                                        answers += (i + ' ');
-                                        break;
-                                    }
-                                }
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "If Statement with Text Output" option
+                        //This solution is specifically for the "If Statement with Text Output" option
                         function checkDivisibleD(fizz, buzz) {
                         
                             let answers = "";
@@ -637,324 +601,149 @@
                             //Turn on the alert box
                             document.getElementById("alertText").classList.remove("hideMe");
                         }
-                        
-                        //--------------------------------------------------------------------------------
-                        //Function to display the elements in a table
-                        function displayTable(answers,checked) {
-                        
-                            let tableBody = document.getElementById('resultsTable');
-                        
-                            let templateRow = document.getElementById('fbTemplate');
-                        
-                            tableBody.innerHTML = "";
-                        
-                            for (let i = 1; i < 100; i += 5) {
-                                let tableRow = document.importNode(templateRow.content, true);
-                                
-                                //Place the TDs into an array and write values to them
-                                //If the color switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
-                                let rowCols = tableRow.querySelectorAll("td");
-                        
-                                if (checked) {
-                                    rowCols[0].classList.add(answers[i]);
-                                    rowCols[0].textContent = answers[i];
-                                } else {
-                                    rowCols[0].textContent = answers[i];
-                                }
-                                if (checked) {
-                                    rowCols[1].classList.add(answers[i+1]);
-                                    rowCols[1].textContent = answers[i+1];
-                                } else {
-                                    rowCols[1].textContent = answers[i+1];
-                                }
-                                if (checked) {
-                                    rowCols[2].classList.add(answers[i+2]);
-                                    rowCols[2].textContent = answers[i+2];
-                                } else {
-                                    rowCols[2].textContent = answers[i+2];
-                                }
-                                if (checked) {
-                                    rowCols[3].classList.add(answers[i+3]);
-                                    rowCols[3].textContent = answers[i+3];
-                                } else {
-                                    rowCols[3].textContent = answers[i+3];
-                                }
-                                if (checked) {
-                                    rowCols[4].classList.add(answers[i+4]);
-                                    rowCols[4].textContent = answers[i+4];
-                                } else {
-                                    rowCols[4].textContent = answers[i+4];
-                                }
-                        
-                                //Print to the table
-                                tableBody.appendChild(tableRow);
-                            }
-                        
-                            //Turn on the alert box
-                            document.getElementById("alertTable").classList.remove("hideMe");
-                        
-                        }
                     </code>
                     </pre>
                 </div>
-                <div id="ifStatementWithText" class="hideMe">
-                    <pre class="line-numbers"><code class="language-javascript">
-                        //Get numbers from the DOM, make them whole numbers, check to see if they are numbers, run the proper set of functions
-                        function getInput() {
-                            //Hiding the two alert boxes each run so there isn't an empty box before or after the proper displayed text/table
-                            document.getElementById("alertText").classList.add("hideMe");
-                            document.getElementById("alertTable").classList.add("hideMe");
-                            
-                            let answers = "";
-                            let coloredAnswers = "";
-                        
-                            let fizzNumber = document.getElementById("fizzNumber").value;
-                            let buzzNumber = document.getElementById("buzzNumber").value;
-                        
-                            let choice = document.getElementById('selector').value;
-                        
-                            let checked = document.getElementById('addColor').checked;
-                        
-                            fizzNumber = parseInt(fizzNumber);
-                            buzzNumber = parseInt(buzzNumber);
-                        
-                            if (Number.isInteger(fizzNumber) && Number.isInteger(buzzNumber)) {
-                        
-                                if ((fizzNumber > 0) && (buzzNumber > 0)) {
-                        
-                                    switch(choice){
-                                        case 'ternaryWithTable':
-                                            answers = checkDivisibleA(fizzNumber, buzzNumber);
-                                            displayTable(answers,checked);
-                                            break;
-                                        case 'ternaryWithText':
-                                            answers = checkDivisibleB(fizzNumber, buzzNumber);
-                                            if (checked) {
-                                                coloredAnswers = addColorText(answers);
-                                                displayText(coloredAnswers);
-                                            } else {
-                                                displayText(answers);
-                                            }
-                                            break;
-                                        case 'switchWithText':
-                                            answers = checkDivisibleC(fizzNumber, buzzNumber);
-                                            if (checked) {
-                                                coloredAnswers = addColorText(answers);
-                                                displayText(coloredAnswers);
-                                            } else {
-                                                displayText(answers);
-                                            }
-                                            break;
-                                        case 'ifStatementWithText':
-                                            answers = checkDivisibleD(fizzNumber, buzzNumber);
-                                            if (checked) {
-                                                coloredAnswers = addColorText(answers);
-                                                displayText(coloredAnswers);
-                                            } else {
-                                                displayText(answers);
-                                            }
-                                            break;
-                                    }
-                        
-                                } else {
-                                    alert("You must enter numbers greater than 0.");
-                                }
-                            } else {
-                                alert("You must enter integers.");
-                            }
-                            }
-                            
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Table Output" option    
-                        function checkDivisibleA(fizz,buzz) {
-                            let answers = [];
-                        
-                            for (let i = 1; i <= 100; i++) {
-                                answers[i] = ((i % fizz == 0 ? 'Fizz' : '') + (i % buzz == 0 ? 'Buzz' : '') || i);        
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Ternary Operator with Text Output" option
-                        function checkDivisibleB(fizz,buzz) {
-                            let answers = "";
-                        
-                            for (let index = 1; index <= 100; index++){
-                                    answers += ((index % fizz == 0 ? 'Fizz' : '') + (index % buzz == 0 ? 'Buzz' : '') || index) + ' ';
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "Boolean Switch Case with Text Output" option
-                        function checkDivisibleC(fizz, buzz) {
-                            let answers = "";
-                            let fizzy = false;
-                            let buzzy = false;
-                        
-                            for (let i = 1; i <= 100; i++) {
-                                fizzy = (i % fizz == 0);
-                                buzzy = (i % buzz == 0);
-                                switch(true) {
-                                    case fizzy && buzzy: {
-                                        answers += 'FizzBuzz ';
-                                        break;
-                                    }
-                                    case fizzy: {
-                                        answers += 'Fizz ';
-                                        break;
-                                    }
-                                    case buzzy: {
-                                        answers += 'Buzz ';
-                                        break;
-                                    }
-                                    default: {
-                                        answers += (i + ' ');
-                                        break;
-                                    }
-                                }
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //This solution is for the "If Statement with Text Output" option
-                        function checkDivisibleD(fizz, buzz) {
-                        
-                            let answers = "";
-                        
-                            for(let index = 1; index <= 100; index++){
-                                if ((index % fizz ==0) && (index % buzz ==0)) {
-                                    answers += "FizzBuzz ";
-                                }   else if (index % buzz == 0) {
-                                    answers += "Buzz ";
-                                }   else if (index % fizz == 0) {
-                                    answers += "Fizz ";
-                                } else {
-                                    answers += index + ' ';
-                                }
-                            }
-                        
-                            return answers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //Add color to the string of answers
-                        function addColorText(answers) {
-                        
-                            coloredAnswers = "";
-                            let splitString = answers.split(" ");
-                        
-                            for (i = 0 ; i <= 99; i++) {
-                                switch (splitString[i]) {
-                                    case 'FizzBuzz': {
-                                        coloredAnswers += `<span class="FizzBuzz">FizzBuzz</span> `;
-                                        break;
-                                    }
-                                    case 'Fizz': {
-                                        coloredAnswers += `<span class="Fizz">Fizz</span> `;
-                                        break;
-                                    }
-                                    case 'Buzz': {
-                                        coloredAnswers += `<span class="Buzz">Buzz</span> `;
-                                        break;
-                                    }
-                                    default: {
-                                        coloredAnswers += `<span class="nonFizzBuzz">${splitString[i]}</span> `;
-                                        break;
-                                    }
-                                }
-                            }
-                        
-                            return coloredAnswers;
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //Fuction to display the answers as a single string of text
-                        function displayText(answers) {
-                            
-                            document.getElementById("resultsText").innerHTML = answers;
-                        
-                            //Turn on the alert box
-                            document.getElementById("alertText").classList.remove("hideMe");
-                        }
-                        
-                        //--------------------------------------------------------------------------------
-                        //Function to display the elements in a table
-                        function displayTable(answers,checked) {
-                        
-                            let tableBody = document.getElementById('resultsTable');
-                        
-                            let templateRow = document.getElementById('fbTemplate');
-                        
-                            tableBody.innerHTML = "";
-                        
-                            for (let i = 1; i < 100; i += 5) {
-                                let tableRow = document.importNode(templateRow.content, true);
-                                
-                                //Place the TDs into an array and write values to them
-                                //If the color switch is on add the classes for 'Fizz', 'Buzz' and 'FizzBuzz' using the array so they can be manipulated via CSS
-                                let rowCols = tableRow.querySelectorAll("td");
-                        
-                                if (checked) {
-                                    rowCols[0].classList.add(answers[i]);
-                                    rowCols[0].textContent = answers[i];
-                                } else {
-                                    rowCols[0].textContent = answers[i];
-                                }
-                                if (checked) {
-                                    rowCols[1].classList.add(answers[i+1]);
-                                    rowCols[1].textContent = answers[i+1];
-                                } else {
-                                    rowCols[1].textContent = answers[i+1];
-                                }
-                                if (checked) {
-                                    rowCols[2].classList.add(answers[i+2]);
-                                    rowCols[2].textContent = answers[i+2];
-                                } else {
-                                    rowCols[2].textContent = answers[i+2];
-                                }
-                                if (checked) {
-                                    rowCols[3].classList.add(answers[i+3]);
-                                    rowCols[3].textContent = answers[i+3];
-                                } else {
-                                    rowCols[3].textContent = answers[i+3];
-                                }
-                                if (checked) {
-                                    rowCols[4].classList.add(answers[i+4]);
-                                    rowCols[4].textContent = answers[i+4];
-                                } else {
-                                    rowCols[4].textContent = answers[i+4];
-                                }
-                        
-                                //Print to the table
-                                tableBody.appendChild(tableRow);
-                            }
-                        
-                            //Turn on the alert box
-                            document.getElementById("alertTable").classList.remove("hideMe");
-                        
-                        }
-                    </code>
-                    </pre>
-                </div>
+                <hr class="d-md-none">
+                
             </div>
-            <div id="codeConstruct" class="col-lg-4">
-                <p>The Code is constructed in one function</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+            <div id="codeConstruct" class="col-lg-4 construct">
+                <div id="descriptionTernaryWithTable" class="description">
+                    <h2 class="mt-1">Ternary with Table Output</h2>
+                    <p class="buffer">The Code is constructed in three functions.</p>
+                    <h5>getInput()</h5>
+                    <ol>
+                        <li>getInput() is called by an event listener.</li>
+                        <li>Sets the given Fizz and Buzz values to variables.</li>
+                        <li>Checks if the color switch is activated and sets a variable to true/false.</li>
+                        <li>Sets the user's solution "choice" to a variable.</li>
+                        <li>Parses Fizz and Buzz into Integers.</li>
+                        <li>Checks that Fizz and Buzz are both numbers.</li>
+                        <li>Calls the specific function based on the given options with a switch statement.</li>
+                    </ol>
+                    <h5>checkDivisibleA(fizz,buzz)</h5>
+                    <ol>
+                        <li>Clears the "answers" variable.</li>
+                        <li>Uses a For loop to run 1 to 100.</li>
+                        <li>Uses the Ternary Operator to write FizzBuzz, Fizz, Buzz, or the loop number to the "answers" array.</li>
+                        <li>Returns "answers".</li>
+                    </ol>
+                    <h5>displayTable(answers,checked)</h5>
+                    <ol>
+                        <li>Sets the HTML element "resultsTable" to a variable, then clears it.</li>
+                        <li>Sets an HTML Template to a variable.</li>
+                        <li>Uses a For loop to append the values in "answers[]" into the template 5 rows at a time.</li>
+                        <ul>-If the "Add Color" switch is enabled it adds the classes "Fizz", "Buzz", or "FizzBuzz" so they can be manipulated using CSS.</ul>
+                        <li>Unhides the table on the page.</li>
+                    </ol>
+                </div>
+                <div id="descriptionTernaryWithText" class="description hideMe">
+                    <h2 class="mt-1">Ternary with Text Output</h2>
+                    <p class="buffer">The Code is constructed in three functions (One extra for "Add Color").</p>
+                    <h5>getInput()</h5>
+                    <ol>
+                        <li>getInput() is called by an event listener.</li>
+                        <li>Sets the given Fizz and Buzz values to variables.</li>
+                        <li>Checks if the color switch is activated and sets a variable to true/false.</li>
+                        <li>Sets the user's solution "choice" to a variable.</li>
+                        <li>Parses Fizz and Buzz into Integers.</li>
+                        <li>Checks that Fizz and Buzz are both numbers.</li>
+                        <li>Calls the specific function based on the given options with a switch statement.</li>
+                    </ol>
+                    <h5>checkDivisibleB(fizz,buzz)</h5>
+                    <ol>
+                        <li>Clears the "answers" variable.</li>
+                        <li>Uses a For loop to run 1 to 100.</li>
+                        <li>Uses the Ternary Operator to write FizzBuzz, Fizz, Buzz, or the loop number to the "answers" string.</li>
+                        <li>Returns "answers".</li>
+                    </ol>
+                    <h5>addColorText(answers)</h5>
+                    <ol>
+                        <li>NOTE: Template Literals do not display correctly in the Prism code to the left.</li>
+                        <li>Splits the "answers" string into an array.</li>
+                        <li>Uses a For loop with a switch statement and Template Literals to add a class to each answer. </li>
+                        <li>Returns "coloredAnswers"</li>
+                    </ol>
+                    <h5>displayTable(answers)</h5>
+                    <ol>
+                        <li>Writes the "answers" string to the innerHTML of the "resultsText" element.</li>
+                        <li>Unhides the alert box that contains "resultsText".</li>
+                    </ol>
+                </div>
+                <div id="descriptionSwitchWithText" class="description hideMe">
+                    <h2 class="mt-1">Boolean Switch Case with Text Output</h2>
+                    <p class="buffer">The Code is constructed in three functions (One extra for "Add Color").</p>
+                    <h5>getInput()</h5>
+                    <ol>
+                        <li>getInput() is called by an event listener.</li>
+                        <li>Sets the given Fizz and Buzz values to variables.</li>
+                        <li>Checks if the color switch is activated and sets a variable to true/false.</li>
+                        <li>Sets the user's solution "choice" to a variable.</li>
+                        <li>Parses Fizz and Buzz into Integers.</li>
+                        <li>Checks that Fizz and Buzz are both numbers.</li>
+                        <li>Calls the specific function based on the given options with a switch statement.</li>
+                    </ol>
+                    <h5>checkDivisibleB(fizz,buzz)</h5>
+                    <ol>
+                        <li>Clears the "answers" variable.</li>
+                        <li>Creates and sets variables "fizzy" and "buzzy" to false.</li>
+                        <li>Uses a For loop to run 1 to 100 and test if "fizz" or "buzz" divide into them evenly.</li>
+                        <li>Uses a Switch Statement to add FizzBuzz, Fizz, Buzz, or the loop number to the "answers" string.</li>
+                        <li>Returns "answers".</li>
+                    </ol>
+                    <h5>addColorText(answers)</h5>
+                    <ol>
+                        <li>NOTE: Template Literals do not display correctly in the Prism code to the left.</li>
+                        <li>Splits the "answers" string into an array.</li>
+                        <li>Uses a For loop with a switch statement and Template Literals to add a class to each answer. </li>
+                        <li>Returns "coloredAnswers"</li>
+                    </ol>
+                    <h5>displayTable(answers)</h5>
+                    <ol>
+                        <li>Writes the "answers" string to the innerHTML of the "resultsText" element.</li>
+                        <li>Unhides the alert box that contains "resultsText".</li>
+                    </ol>
+                </div>
+                <div id="descriptionIfStatementWithText" class="description hideMe">
+                    <h2 class="mt-1">Boolean Switch Case with Text Output</h2>
+                    <p class="buffer">The Code is constructed in three functions (One extra for "Add Color").</p>
+                    <h5>getInput()</h5>
+                    <ol>
+                        <li>getInput() is called by an event listener.</li>
+                        <li>Sets the given Fizz and Buzz values to variables.</li>
+                        <li>Checks if the color switch is activated and sets a variable to true/false.</li>
+                        <li>Sets the user's solution "choice" to a variable.</li>
+                        <li>Parses Fizz and Buzz into Integers.</li>
+                        <li>Checks that Fizz and Buzz are both numbers.</li>
+                        <li>Calls the specific function based on the given options with a switch statement.</li>
+                    </ol>
+                    <h5>checkDivisibleB(fizz,buzz)</h5>
+                    <ol>
+                        <li>Clears the "answers" variable.</li>
+                        <li>Uses a For loop to run 1 to 100 with a nested If Statement to add FizzBuzz, Fizz, Buzz, or the loop number to the "answers" string.</li>
+                        <li>Returns "answers".</li>
+                    </ol>
+                    <h5>addColorText(answers)</h5>
+                    <ol>
+                        <li>NOTE: Template Literals do not display correctly in the Prism code to the left.</li>
+                        <li>Splits the "answers" string into an array.</li>
+                        <li>Uses a For loop with a switch statement and Template Literals to add a class to each answer. </li>
+                        <li>Returns "coloredAnswers"</li>
+                    </ol>
+                    <h5>displayTable(answers)</h5>
+                    <ol>
+                        <li>Writes the "answers" string to the innerHTML of the "resultsText" element.</li>
+                        <li>Unhides the alert box that contains "resultsText".</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
 </main>
     <!-- ==== Footer Section ==== -->
-    <footer class="footer mt-auto py-3 sticky-footer">
+    <footer class="footer mt-auto py-3 order-last sticky-footer">
         <div class="container-fluid">
-           <div class="row row-cols-1 row-cols-md-3 gy-2">
+           <div class="row row-cols-1 row-cols-md-3 gy-1">
                 <!-- ==== Copyright ==== -->
                 <div class="col order-last order-md-first text-light">
                     <div><span class="text-muted">&copy;2022</span> Ken Klein | ken@kencodes.net</div>
