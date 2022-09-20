@@ -28,19 +28,8 @@ nav {
     height: 80vh;
 }
 
-footer {
-    background-color: var(--dark-color);
-    position: fixed; bottom: 0; left: 0; right: 0;
-
-}
-
 h1,h2,h3,h4,h5,h6 {
     color: var(--primary-color);
-}
-
-footer .social>a {
-    color: var(--white-color);
-    opacity: 0.75;
 }
 
 .bsicon {
@@ -49,7 +38,7 @@ footer .social>a {
 
 .codeBlock {
     overflow:scroll;
-    height: 72vh;
+    height: 74vh;
 }
 
 .FizzBuzz {
@@ -79,7 +68,7 @@ footer .social>a {
 
 .description {
     overflow:scroll;
-    height:77vh;
+    height: 80vh;
     margin-bottom:auto;
 }
 
@@ -107,22 +96,18 @@ main>.container {
     margin-bottom: 5rem;
 }
 
+footer {
+    background-color: var(--dark-color);
+    position: relative;
+    bottom: 0;
+}
+
+footer .social>a {
+    color: var(--white-color);
+    opacity: 0.75;
+}
+
 footer .social>a:hover{
     opacity: 0.90;
     color: var(--secondary-color)
 }
-
-@media only screen and (max-width: 600px) {
-    .construct {
-        height:fit-content;
-        margin-bottom:10vh;
-    }
-    .footer {
-        margin-top:auto;
-        padding-top:1rem;
-    }
-    .description {
-      height: 100vh;
-      margin-bottom: 30px;
-    }
-  }
